@@ -9,20 +9,80 @@ namespace ADO_NET
 {
 	internal class Program
 	{
+		static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Movies;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+		static SqlConnection connection;
 		static void Main(string[] args)
 		{
 			//1) Создаем подключение к Базе данных на Сервере
-			string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Movies;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 			Console.WriteLine(connectionString);
-			SqlConnection connection = new SqlConnection();
+			connection = new SqlConnection();
 			connection.ConnectionString = connectionString;
-			//2)Открываем соединение. //после того как подключение создано, оно не явяется открытым, т.е поключение всегда открывается вручную при необходимости
+
+			//Select("SELECT * FROM Directors");
+			//Console.WriteLine();
+			//Select("SELECT * FROM Movies");
+
+			Select("*", "Directors");
+			Console.WriteLine();
+			Select("movie_name,release_date,first_name+last_name AS Режисер", "Movies,Directors","director = director_id");
+
+#if SCALAR_CHEC
 			connection.Open();
 
-			//________________________________________________________________________
+			string cmd = "SELECT COUNT(*) FROM Directors";
+			SqlCommand command = new SqlCommand(cmd, connection);
+			Console.WriteLine($"Количество режиссеров:\t{command.ExecuteScalar()}");
 
+			command.CommandText = "SELECT COUNT(*) FROM Movies";
+			Console.WriteLine($"Количество кино:\t{command.ExecuteScalar()}");
+
+			command.CommandText = "SELECT last_name FROM Directors WHERE first_name = N'James'";
+			Console.WriteLine(command.ExecuteScalar());
+
+			connection.Close();
+
+			Console.WriteLine(Scalar("SELECT COUNT(*) FROM Movies")); 
+#endif
+			//Console.Write("Vvedite imya: ");
+			//string first_name = Console.ReadLine();
+
+			//Console.Write("Vvedite familiy: ");
+			//string last_name = Console.ReadLine();
+
+			Insert("Michael", "Newel");
+
+			Select("*", "Directors");
+		}
+		static void Insert(string first_name, string last_name) 
+		{
+			string cmd =
+			$"INSERT Directors(director_id,first_name,last_name) VALUES({Convert.ToInt32(Scalar("SELECT MAX(director_id) FROM Directors"))+ 1},N'{first_name}',N'{last_name}')";
+			SqlCommand command = new SqlCommand(cmd, connection);
+
+			connection.Open();
+			command.ExecuteNonQuery();
+			connection.Close();
+		}
+		static object Scalar(string cmd) 
+		{
+			connection.Open();
+
+			SqlCommand command = new SqlCommand(cmd,connection);
+			object obj = command.ExecuteScalar();
+
+			connection.Close();
+			return obj;
+		}
+		static void Select(string fields, string tables, string condition = "") 
+		{
+			//2)Открываем соединение. //после того как подключение создано, оно не явяется открытым, т.е поключение всегда открывается вручную при необходимости
+		  connection.Open();
+
+			//________________________________________________________________________
 			//3) Для  испольования подключения создаем "SqlDataReader"
-			string cmd = "SELECT * FROM Directors;";
+			string cmd = $"SELECT {fields} FROM {tables}";
+			if (condition != "") cmd += $" WHERE {condition}";
+			cmd += ";";
 			SqlCommand command = new SqlCommand(cmd,connection); //что и по какому соединению
 
 			//4) Создаем "Reader"
@@ -43,14 +103,9 @@ namespace ADO_NET
 				 Console.WriteLine();
 			}
 			reader.Close();
-
-
-
 			//------------------------------------------------------------------------
 			//?) Подключение обязательно нужно закрывать
 			connection.Close();
-
-
 		}
 	}
 }
