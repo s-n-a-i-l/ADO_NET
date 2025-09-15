@@ -36,7 +36,7 @@ namespace ADO_NET
 			while (reader.Read()) 
 			{
 				//Console.WriteLine($"{reader[0]}\t{reader[1]}\t{reader[2]}");//cтолбики - поля
-				for (int i = 0; i < reader.FieldCount; i++) 
+				for (int i = 0; i < reader.FieldCount; i++)   
 				{
 			     Console.Write(reader[i]+"\t\t");
 				}
