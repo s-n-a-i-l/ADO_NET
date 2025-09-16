@@ -22,9 +22,10 @@ namespace ADO_NET
 			//Console.WriteLine();
 			//Select("SELECT * FROM Movies");
 
-			Select("*", "Directors");
+			//Select("*", "Directors");
+			//Select("*", "*");
 			Console.WriteLine();
-			Select("movie_name,release_date,first_name+last_name AS Режисер", "Movies,Directors","director = director_id");
+			//Select("movie_name,release_date,first_name+last_name AS Режисер", "Movies,Directors","director = director_id");
 
 #if SCALAR_CHEC
 			connection.Open();
@@ -49,15 +50,20 @@ namespace ADO_NET
 			//Console.Write("Vvedite familiy: ");
 			//string last_name = Console.ReadLine();
 
-			Insert("Michael", "Newel");
+			Insert("prov", "erka");
 
 			Select("*", "Directors");
 		}
 		static void Insert(string first_name, string last_name) 
 		{
+			int newId = Convert.ToInt32(Scalar("SELECT MAX(director_id) FROM Directors")) + 1;
 			string cmd =
-			$"INSERT Directors(director_id,first_name,last_name) VALUES({Convert.ToInt32(Scalar("SELECT MAX(director_id) FROM Directors"))+ 1},N'{first_name}',N'{last_name}')";
+			"INSERT INTO Directors (director_id, first_name, last_name) VALUES (@id, @first_name, @last_name)";
 			SqlCommand command = new SqlCommand(cmd, connection);
+			//параметр(@id, @first_name, @last_name), он безопасней чем конкатенация строк 
+			command.Parameters.AddWithValue("@id", newId);
+			command.Parameters.AddWithValue("@first_name", first_name);
+			command.Parameters.AddWithValue("@last_name", last_name);
 
 			connection.Open();
 			command.ExecuteNonQuery();
