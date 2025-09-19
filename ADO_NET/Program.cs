@@ -4,18 +4,19 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Configuration;
 
 namespace ADO_NET
 {
 	internal class Program
 	{
-		static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Movies;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+		static string connectionString = "";
 		static void Main(string[] args)
 		{
-
+			//0)Достаем строку подключения из App.config
+			connectionString = ConfigurationManager.ConnectionStrings["Movies"].ConnectionString;
 			//1) Создаем подключение к Базе данных на Сервере
-			//Console.WriteLine(connectionString);
+			Console.WriteLine(connectionString);
 			//connection = new SqlConnection();
 			//connection.ConnectionString = connectionString
 			Connector db = new Connector(connectionString);
@@ -29,7 +30,7 @@ namespace ADO_NET
 			Connector.Select("*", "Directors");
 			//Select("*", "*");
 
-			//Select("movie_name,release_date,first_name+last_name AS Режисер", "Movies,Directors","director = director_id");
+			//Connector.Select("movie_name,release_date,first_name+last_name AS Режисер", "Movies,Directors","director = director_id");
 
 #if SCALAR_CHEC
 			connection.Open();
