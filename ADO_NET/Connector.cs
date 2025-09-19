@@ -13,6 +13,7 @@ namespace ADO_NET
 		static SqlConnection connection;
 		private readonly string connectionString_;
 
+		
 		private SqlConnection GetConnection()
 		{
 			return new SqlConnection(connectionString_);
@@ -166,6 +167,37 @@ namespace ADO_NET
 			//?) Подключение обязательно нужно закрывать
 			connection.Close();
 		}
+
+		public static void SelectWithParemeters(string first_name, string last_name)
+		{
+			string cmd = "SELECT movie_name,release_date,last_name,first_name FROM Movies,Directors WHERE director=director_id AND last_name=@last_name AND first_name=@first_name;";
+			//SqlParameter parameter = new SqlParameter();
+			SqlCommand command = new SqlCommand(cmd, connection);
+			command.Parameters.Add(new SqlParameter("@last_name", System.Data.SqlDbType.NVarChar)).Value = last_name;
+			command.Parameters.Add(new SqlParameter("@first_name", System.Data.SqlDbType.NVarChar)).Value = first_name;
+			connection.Open();
+			SqlDataReader reader = command.ExecuteReader();
+			for (int i = 0; i < reader.FieldCount; i++)
+			{
+				Console.Write(reader.GetName(i) + "\t");
+				Console.WriteLine();
+			}
+			while (reader.Read())
+			{
+				for (int i = 0; i < reader.FieldCount; i++)
+				{
+					Console.WriteLine(reader[i] + "\t");
+					Console.WriteLine();
+				}
+			}
+			connection.Close();
+		}
+
+
+
+
+
+
 
 	}
 }

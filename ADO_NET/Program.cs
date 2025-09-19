@@ -28,6 +28,8 @@ namespace ADO_NET
 			//Select("SELECT * FROM Movies");
 
 			Connector.Select("*", "Directors");
+
+			Connector.SelectWithParemeters("James","Cameron");
 			//Select("*", "*");
 
 			//Connector.Select("movie_name,release_date,first_name+last_name AS Режисер", "Movies,Directors","director = director_id");
@@ -51,7 +53,7 @@ namespace ADO_NET
 #endif
 
 			//InsertDiretor();
-			Connector.InsertMovie();
+			//Connector.InsertMovie();
 
 		}
 	}
