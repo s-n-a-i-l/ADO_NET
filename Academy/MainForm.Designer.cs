@@ -271,6 +271,7 @@
 			this.comboBoxGroupsDirection.Name = "comboBoxGroupsDirection";
 			this.comboBoxGroupsDirection.Size = new System.Drawing.Size(321, 21);
 			this.comboBoxGroupsDirection.TabIndex = 2;
+			this.comboBoxGroupsDirection.SelectedIndexChanged += new System.EventHandler(this.comboBoxGroupsDirection_SelectedIndexChanged);
 			// 
 			// MainForm
 			// 
