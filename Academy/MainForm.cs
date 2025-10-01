@@ -19,6 +19,7 @@ namespace Academy
 			SqlConnection connection;
 			string connectionString = "Data Source=DESKTOP-NFMFIIS\\SQLEXPRESS;Initial Catalog=PD_321;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 			Dictionary<string, int> d_groupDirection;
+			Dictionary<string, int> d_studentsGroup;
 
 		Query[] queries = new Query[]
 			{
@@ -68,9 +69,13 @@ namespace Academy
 			//	"group_id,group_name,direction", "Groups,Directions", "direction=direction_id"
 			//	);
 
-			d_groupDirection = LoadDataToComboBox("*", "Directions");
+			d_groupDirection = LoadDataToDictionary("*", "Directions");
+			d_studentsGroup = LoadDataToDictionary("*", "Groups");
 			comboBoxGroupsDirection.Items.AddRange(d_groupDirection.Keys.ToArray());
-			comboBoxGroupsDirection.SelectedIndex = 0;
+			comboBoxStudentsDirection.Items.AddRange(d_groupDirection.Keys.ToArray());
+			comboBoxStudentsGroup.Items.AddRange(d_studentsGroup.Keys.ToArray());
+			comboBoxStudentsDirection.SelectedIndex = comboBoxGroupsDirection.SelectedIndex = 0;
+			comboBoxStudentsGroup.SelectedIndex = 0;
 
 			tabControl.SelectedIndex = 1;
 
@@ -115,6 +120,26 @@ namespace Academy
 
 			return table;
 		}
+		Dictionary<string, int> LoadDataToDictionary(string fields, string tables, string condition = "")
+		{
+			Dictionary<string, int> dictionary = new Dictionary<string, int>();
+			dictionary.Add("Все", 0);
+			string cmd = $"SELECT {fields} FROM {tables}";
+			if (!string.IsNullOrWhiteSpace(condition))
+				cmd += $" WHERE {condition}";
+
+			SqlCommand command = new SqlCommand(cmd, connection);
+			connection.Open();
+			SqlDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				//comboBoxGroupsDirection.Items.Add(reader[1]);
+				dictionary.Add(reader[1].ToString(), Convert.ToInt32(reader[0]));
+			}
+			reader.Close();
+			connection.Close();
+			return dictionary;
+		}
 		private void tabControl_SelectedIndexChanged_1(object sender, EventArgs e)
 		{
 			LoadTab((sender as TabControl).SelectedIndex);
@@ -153,13 +178,50 @@ namespace Academy
 		}
 		[DllImport("kernel32.dll")]
 		static extern void AllocConsole();
-		//private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
-		//{
-		//	LoadTab((sender as TabControl).SelectedIndex);
-		//}
+		
 		private void dataGridViewChanged(object sender, EventArgs e)
 		{
 			toolStripStatusLabel.Text = $"{statusBarMessages[tabControl.SelectedIndex]}: {(sender as DataGridView).RowCount - 1}";
+		}
+		void ConvertLearningDays()
+		{
+			for (int i = 0; i < dataGridViewGroups.RowCount; i++)
+			{
+
+				dataGridViewGroups.Rows[i].Cells["learning_days"].Value =
+					new Week(Convert.ToByte(dataGridViewGroups.Rows[i].Cells["learning_days"].Value));
+			}
+		}
+
+		private void comboBoxStudentsGroup_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			string condition_group =
+				comboBoxStudentsGroup.SelectedItem.ToString() == "Все" ? "" :
+				$"[group]={d_studentsGroup[comboBoxStudentsGroup.SelectedItem.ToString()]}";
+			string condition_direction = comboBoxStudentsDirection.SelectedItem.ToString() == "Все" ? "" :
+				$" direction={d_groupDirection[comboBoxStudentsDirection.SelectedItem.ToString()]}";
+			dataGridViewStudents.DataSource = Select
+				(
+					queries[0].Fields,
+					queries[0].Tables,
+					queries[0].Condition
+					+ (string.IsNullOrWhiteSpace(condition_group) ? "" : $" AND {condition_group}")
+					+ (string.IsNullOrWhiteSpace(condition_direction) ? "" : $" AND {condition_direction}")
+				);
+		}
+
+		private void comboBoxStudentsDirection_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			string condition = comboBoxStudentsDirection.SelectedItem.ToString() == "Все" ? "" :
+				$" direction={d_groupDirection[(sender as ComboBox).SelectedItem.ToString()]}";
+			comboBoxStudentsGroup.Items.Clear();
+			comboBoxStudentsGroup.Items.AddRange(LoadDataToDictionary("*", "Groups", condition).Keys.ToArray());
+			dataGridViewStudents.DataSource = Select
+				(
+					queries[0].Fields,
+					queries[0].Tables,
+					queries[0].Condition + (string.IsNullOrEmpty(condition) ? "" : $" AND {condition}")
+				);
 		}
 	}
 }
