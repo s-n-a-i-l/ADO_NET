@@ -48,6 +48,7 @@
 			this.dataGridViewDisciplines = new System.Windows.Forms.DataGridView();
 			this.tabPageTeachers = new System.Windows.Forms.TabPage();
 			this.dataGridViewTeachers = new System.Windows.Forms.DataGridView();
+			this.checkBoxEmptyDirection = new System.Windows.Forms.CheckBox();
 			this.statusStrip.SuspendLayout();
 			this.tabControl.SuspendLayout();
 			this.tabPageStudents.SuspendLayout();
@@ -210,6 +211,7 @@
 			// 
 			// tabPageDirections
 			// 
+			this.tabPageDirections.Controls.Add(this.checkBoxEmptyDirection);
 			this.tabPageDirections.Controls.Add(this.dataGridViewDirections);
 			this.tabPageDirections.Location = new System.Drawing.Point(4, 22);
 			this.tabPageDirections.Name = "tabPageDirections";
@@ -275,6 +277,17 @@
 			this.dataGridViewTeachers.Size = new System.Drawing.Size(789, 373);
 			this.dataGridViewTeachers.TabIndex = 0;
 			// 
+			// checkBoxEmptyDirection
+			// 
+			this.checkBoxEmptyDirection.AutoSize = true;
+			this.checkBoxEmptyDirection.Location = new System.Drawing.Point(606, 6);
+			this.checkBoxEmptyDirection.Name = "checkBoxEmptyDirection";
+			this.checkBoxEmptyDirection.Size = new System.Drawing.Size(183, 17);
+			this.checkBoxEmptyDirection.TabIndex = 1;
+			this.checkBoxEmptyDirection.Text = "Показать пустые направления";
+			this.checkBoxEmptyDirection.UseVisualStyleBackColor = true;
+			this.checkBoxEmptyDirection.CheckedChanged += new System.EventHandler(this.checkBoxEmptyDirection_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,6 +308,7 @@
 			this.tabPageGroups.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewGroups)).EndInit();
 			this.tabPageDirections.ResumeLayout(false);
+			this.tabPageDirections.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewDirections)).EndInit();
 			this.tabPageDisciplines.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewDisciplines)).EndInit();
@@ -327,6 +341,7 @@
 		private System.Windows.Forms.Label labelStudentsGroup;
 		private System.Windows.Forms.ComboBox comboBoxGroupsDirection;
 		private System.Windows.Forms.Label labelGroupsDirection;
+		private System.Windows.Forms.CheckBox checkBoxEmptyDirection;
 	}
 }
 

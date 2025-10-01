@@ -223,6 +223,33 @@ namespace Academy
 					queries[0].Condition + (string.IsNullOrEmpty(condition) ? "" : $" AND {condition}")
 				);
 		}
+
+		private void checkBoxEmptyDirection_CheckedChanged(object sender, EventArgs e)
+		{
+			LoadDirections();
+		}
+
+		private void LoadDirections()
+		{
+			if (checkBoxEmptyDirection.Checked)
+			{
+				// направления без групп
+				dataGridViewDirections.DataSource = Select(
+					"d.direction_id, d.direction_name",
+					"Directions d LEFT JOIN Groups g ON d.direction_id = g.direction",
+					"g.group_id IS NULL"
+				);
+			}
+			else
+			{
+				dataGridViewDirections.DataSource = Select(
+					queries[2].Fields,
+					queries[2].Tables,
+					queries[2].Condition
+				);
+			}
+		}
+
 	}
 }
 //		void LoadDirections() 
