@@ -32,7 +32,7 @@
 			this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabPageStudents = new System.Windows.Forms.TabPage();
-			this.buttonAddStudent = new System.Windows.Forms.Button();
+			this.buttonAddEditStudent = new System.Windows.Forms.Button();
 			this.comboBoxStudentsDirection = new System.Windows.Forms.ComboBox();
 			this.labelStudentsDirection = new System.Windows.Forms.Label();
 			this.comboBoxStudentsGroup = new System.Windows.Forms.ComboBox();
@@ -49,6 +49,8 @@
 			this.tabPageTeachers = new System.Windows.Forms.TabPage();
 			this.dataGridViewTeachers = new System.Windows.Forms.DataGridView();
 			this.checkBoxEmptyDirection = new System.Windows.Forms.CheckBox();
+			this.buttonAddEditGroup = new System.Windows.Forms.Button();
+			this.buttonAddEditTeacher = new System.Windows.Forms.Button();
 			this.statusStrip.SuspendLayout();
 			this.tabControl.SuspendLayout();
 			this.tabPageStudents.SuspendLayout();
@@ -94,7 +96,7 @@
 			// 
 			// tabPageStudents
 			// 
-			this.tabPageStudents.Controls.Add(this.buttonAddStudent);
+			this.tabPageStudents.Controls.Add(this.buttonAddEditStudent);
 			this.tabPageStudents.Controls.Add(this.comboBoxStudentsDirection);
 			this.tabPageStudents.Controls.Add(this.labelStudentsDirection);
 			this.tabPageStudents.Controls.Add(this.comboBoxStudentsGroup);
@@ -108,14 +110,14 @@
 			this.tabPageStudents.Text = "Students";
 			this.tabPageStudents.UseVisualStyleBackColor = true;
 			// 
-			// buttonAddStudent
+			// buttonAddEditStudent
 			// 
-			this.buttonAddStudent.Location = new System.Drawing.Point(709, 4);
-			this.buttonAddStudent.Name = "buttonAddStudent";
-			this.buttonAddStudent.Size = new System.Drawing.Size(75, 23);
-			this.buttonAddStudent.TabIndex = 5;
-			this.buttonAddStudent.Text = "Добавить";
-			this.buttonAddStudent.UseVisualStyleBackColor = true;
+			this.buttonAddEditStudent.Location = new System.Drawing.Point(662, 4);
+			this.buttonAddEditStudent.Name = "buttonAddEditStudent";
+			this.buttonAddEditStudent.Size = new System.Drawing.Size(122, 23);
+			this.buttonAddEditStudent.TabIndex = 5;
+			this.buttonAddEditStudent.Text = "Добавить/Изменить";
+			this.buttonAddEditStudent.UseVisualStyleBackColor = true;
 			// 
 			// comboBoxStudentsDirection
 			// 
@@ -168,6 +170,7 @@
 			// 
 			// tabPageGroups
 			// 
+			this.tabPageGroups.Controls.Add(this.buttonAddEditGroup);
 			this.tabPageGroups.Controls.Add(this.comboBoxGroupsDirection);
 			this.tabPageGroups.Controls.Add(this.labelGroupsDirection);
 			this.tabPageGroups.Controls.Add(this.dataGridViewGroups);
@@ -258,6 +261,7 @@
 			// 
 			// tabPageTeachers
 			// 
+			this.tabPageTeachers.Controls.Add(this.buttonAddEditTeacher);
 			this.tabPageTeachers.Controls.Add(this.dataGridViewTeachers);
 			this.tabPageTeachers.Location = new System.Drawing.Point(4, 22);
 			this.tabPageTeachers.Name = "tabPageTeachers";
@@ -287,6 +291,24 @@
 			this.checkBoxEmptyDirection.Text = "Показать пустые направления";
 			this.checkBoxEmptyDirection.UseVisualStyleBackColor = true;
 			this.checkBoxEmptyDirection.CheckedChanged += new System.EventHandler(this.checkBoxEmptyDirection_CheckedChanged);
+			// 
+			// buttonAddEditGroup
+			// 
+			this.buttonAddEditGroup.Location = new System.Drawing.Point(660, 5);
+			this.buttonAddEditGroup.Name = "buttonAddEditGroup";
+			this.buttonAddEditGroup.Size = new System.Drawing.Size(124, 23);
+			this.buttonAddEditGroup.TabIndex = 3;
+			this.buttonAddEditGroup.Text = "Добавить/Изменить";
+			this.buttonAddEditGroup.UseVisualStyleBackColor = true;
+			// 
+			// buttonAddEditTeacher
+			// 
+			this.buttonAddEditTeacher.Location = new System.Drawing.Point(659, 3);
+			this.buttonAddEditTeacher.Name = "buttonAddEditTeacher";
+			this.buttonAddEditTeacher.Size = new System.Drawing.Size(125, 23);
+			this.buttonAddEditTeacher.TabIndex = 1;
+			this.buttonAddEditTeacher.Text = "Добавить/Изменить";
+			this.buttonAddEditTeacher.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
@@ -334,7 +356,7 @@
 		private System.Windows.Forms.DataGridView dataGridViewStudents;
 		private System.Windows.Forms.DataGridView dataGridViewGroups;
 		private System.Windows.Forms.DataGridView dataGridViewTeachers;
-		private System.Windows.Forms.Button buttonAddStudent;
+		private System.Windows.Forms.Button buttonAddEditStudent;
 		private System.Windows.Forms.ComboBox comboBoxStudentsDirection;
 		private System.Windows.Forms.Label labelStudentsDirection;
 		private System.Windows.Forms.ComboBox comboBoxStudentsGroup;
@@ -342,6 +364,8 @@
 		private System.Windows.Forms.ComboBox comboBoxGroupsDirection;
 		private System.Windows.Forms.Label labelGroupsDirection;
 		private System.Windows.Forms.CheckBox checkBoxEmptyDirection;
+		private System.Windows.Forms.Button buttonAddEditGroup;
+		private System.Windows.Forms.Button buttonAddEditTeacher;
 	}
 }
 
