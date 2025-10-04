@@ -49,6 +49,7 @@ namespace DataSet
 			const string dstGroups_col_start_time = "start_time";
 
 			GroupsRelatedData.Tables.Add(dsTable_Groups);
+			//добавляем поля в таблицу
 			GroupsRelatedData.Tables[dsTable_Groups].Columns.Add(dstGroups_col_group_id);
 			GroupsRelatedData.Tables[dsTable_Groups].Columns.Add(dstGroups_col_group_name);
 			GroupsRelatedData.Tables[dsTable_Groups].Columns.Add(dstGroups_col_direction);
@@ -103,11 +104,41 @@ namespace DataSet
 				}
 				Console.WriteLine();
 			}
+
+			comboBoxStudentsGroup.DataSource = GroupsRelatedData.Tables[dsTable_Groups];
+			comboBoxStudentsGroup.DisplayMember = GroupsRelatedData.Tables[dsTable_Groups].Columns[dstGroups_col_group_name].ToString();//что отображается
+			comboBoxStudentsGroup.ValueMember = GroupsRelatedData.Tables[dsTable_Groups].Columns[dstGroups_col_group_id].ToString();
+
+			comboBoxStudentsDirection.DataSource = GroupsRelatedData.Tables[dsTable_Directions];
+			comboBoxStudentsDirection.DisplayMember = GroupsRelatedData.Tables[dsTable_Directions].Columns[dstDirections_col_direction_name].ToString();
+			comboBoxStudentsDirection.ValueMember = GroupsRelatedData.Tables[dsTable_Directions].Columns[dstDirections_col_direction_id].ToString();
+
+			comboBoxStudentsGroup.SelectedIndexChanged += new EventHandler(GetKeyValue); 
+			comboBoxStudentsDirection.SelectedIndexChanged += new EventHandler(GetKeyValue); 
+
+
 		}
+		void GetKeyValue(object sender, EventArgs e) 
+		{
+			Console.WriteLine($"{(sender as ComboBox).Name}:\t{(sender as ComboBox).SelectedValue}");
+		}
+
 		[DllImport("kernel32.dll")]
 		public static extern bool AllocConsole();
 		[DllImport("kernel32.dll")]
 		public static extern bool FreeConsole();
 
+		private void comboBoxStudentsDirection_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			var rows = GroupsRelatedData.Tables["Groups"].
+				Select($"direction = {comboBoxStudentsDirection.SelectedValue}");
+			if (rows.Length > 0) 
+			comboBoxStudentsGroup.DataSource = rows.CopyToDataTable();
+			else
+			{
+				comboBoxStudentsGroup.DataSource = null;
+				comboBoxStudentsGroup.Items.Clear();
+			}
+		}
 	}
 }

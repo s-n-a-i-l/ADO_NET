@@ -28,13 +28,46 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
+			this.comboBoxStudentsGroup = new System.Windows.Forms.ComboBox();
+			this.comboBoxStudentsDirection = new System.Windows.Forms.ComboBox();
+			this.SuspendLayout();
+			// 
+			// comboBoxStudentsGroup
+			// 
+			this.comboBoxStudentsGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxStudentsGroup.FormattingEnabled = true;
+			this.comboBoxStudentsGroup.Location = new System.Drawing.Point(58, 41);
+			this.comboBoxStudentsGroup.Name = "comboBoxStudentsGroup";
+			this.comboBoxStudentsGroup.Size = new System.Drawing.Size(263, 21);
+			this.comboBoxStudentsGroup.TabIndex = 0;
+			// 
+			// comboBoxStudentsDirection
+			// 
+			this.comboBoxStudentsDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxStudentsDirection.FormattingEnabled = true;
+			this.comboBoxStudentsDirection.Location = new System.Drawing.Point(406, 41);
+			this.comboBoxStudentsDirection.Name = "comboBoxStudentsDirection";
+			this.comboBoxStudentsDirection.Size = new System.Drawing.Size(274, 21);
+			this.comboBoxStudentsDirection.TabIndex = 1;
+			this.comboBoxStudentsDirection.SelectedIndexChanged += new System.EventHandler(this.comboBoxStudentsDirection_SelectedIndexChanged);
+			// 
+			// MainForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Text = "Form1";
+			this.Controls.Add(this.comboBoxStudentsDirection);
+			this.Controls.Add(this.comboBoxStudentsGroup);
+			this.Name = "MainForm";
+			this.Text = "DataSetForm";
+			this.ResumeLayout(false);
+
 		}
 
 		#endregion
+
+		private System.Windows.Forms.ComboBox comboBoxStudentsGroup;
+		private System.Windows.Forms.ComboBox comboBoxStudentsDirection;
 	}
 }
 
