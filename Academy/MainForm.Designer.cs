@@ -39,18 +39,18 @@
 			this.labelStudentsGroup = new System.Windows.Forms.Label();
 			this.dataGridViewStudents = new System.Windows.Forms.DataGridView();
 			this.tabPageGroups = new System.Windows.Forms.TabPage();
+			this.buttonAddEditGroup = new System.Windows.Forms.Button();
 			this.comboBoxGroupsDirection = new System.Windows.Forms.ComboBox();
 			this.labelGroupsDirection = new System.Windows.Forms.Label();
 			this.dataGridViewGroups = new System.Windows.Forms.DataGridView();
 			this.tabPageDirections = new System.Windows.Forms.TabPage();
+			this.checkBoxEmptyDirection = new System.Windows.Forms.CheckBox();
 			this.dataGridViewDirections = new System.Windows.Forms.DataGridView();
 			this.tabPageDisciplines = new System.Windows.Forms.TabPage();
 			this.dataGridViewDisciplines = new System.Windows.Forms.DataGridView();
 			this.tabPageTeachers = new System.Windows.Forms.TabPage();
-			this.dataGridViewTeachers = new System.Windows.Forms.DataGridView();
-			this.checkBoxEmptyDirection = new System.Windows.Forms.CheckBox();
-			this.buttonAddEditGroup = new System.Windows.Forms.Button();
 			this.buttonAddEditTeacher = new System.Windows.Forms.Button();
+			this.dataGridViewTeachers = new System.Windows.Forms.DataGridView();
 			this.statusStrip.SuspendLayout();
 			this.tabControl.SuspendLayout();
 			this.tabPageStudents.SuspendLayout();
@@ -118,6 +118,7 @@
 			this.buttonAddEditStudent.TabIndex = 5;
 			this.buttonAddEditStudent.Text = "Добавить/Изменить";
 			this.buttonAddEditStudent.UseVisualStyleBackColor = true;
+			this.buttonAddEditStudent.Click += new System.EventHandler(this.buttonAddEditStudent_Click);
 			// 
 			// comboBoxStudentsDirection
 			// 
@@ -164,9 +165,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridViewStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewStudents.Location = new System.Drawing.Point(3, 30);
+			this.dataGridViewStudents.MultiSelect = false;
 			this.dataGridViewStudents.Name = "dataGridViewStudents";
+			this.dataGridViewStudents.ReadOnly = true;
+			this.dataGridViewStudents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridViewStudents.Size = new System.Drawing.Size(786, 369);
 			this.dataGridViewStudents.TabIndex = 0;
+			this.dataGridViewStudents.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewStudents_MouseDoubleClick);
 			// 
 			// tabPageGroups
 			// 
@@ -181,6 +186,15 @@
 			this.tabPageGroups.TabIndex = 1;
 			this.tabPageGroups.Text = "Groups";
 			this.tabPageGroups.UseVisualStyleBackColor = true;
+			// 
+			// buttonAddEditGroup
+			// 
+			this.buttonAddEditGroup.Location = new System.Drawing.Point(660, 5);
+			this.buttonAddEditGroup.Name = "buttonAddEditGroup";
+			this.buttonAddEditGroup.Size = new System.Drawing.Size(124, 23);
+			this.buttonAddEditGroup.TabIndex = 3;
+			this.buttonAddEditGroup.Text = "Добавить/Изменить";
+			this.buttonAddEditGroup.UseVisualStyleBackColor = true;
 			// 
 			// comboBoxGroupsDirection
 			// 
@@ -209,6 +223,7 @@
 			this.dataGridViewGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewGroups.Location = new System.Drawing.Point(3, 30);
 			this.dataGridViewGroups.Name = "dataGridViewGroups";
+			this.dataGridViewGroups.ReadOnly = true;
 			this.dataGridViewGroups.Size = new System.Drawing.Size(786, 369);
 			this.dataGridViewGroups.TabIndex = 0;
 			// 
@@ -223,6 +238,17 @@
 			this.tabPageDirections.TabIndex = 2;
 			this.tabPageDirections.Text = "Directions";
 			this.tabPageDirections.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxEmptyDirection
+			// 
+			this.checkBoxEmptyDirection.AutoSize = true;
+			this.checkBoxEmptyDirection.Location = new System.Drawing.Point(606, 6);
+			this.checkBoxEmptyDirection.Name = "checkBoxEmptyDirection";
+			this.checkBoxEmptyDirection.Size = new System.Drawing.Size(183, 17);
+			this.checkBoxEmptyDirection.TabIndex = 1;
+			this.checkBoxEmptyDirection.Text = "Показать пустые направления";
+			this.checkBoxEmptyDirection.UseVisualStyleBackColor = true;
+			this.checkBoxEmptyDirection.CheckedChanged += new System.EventHandler(this.checkBoxEmptyDirection_CheckedChanged);
 			// 
 			// dataGridViewDirections
 			// 
@@ -270,6 +296,15 @@
 			this.tabPageTeachers.Text = "Teachers";
 			this.tabPageTeachers.UseVisualStyleBackColor = true;
 			// 
+			// buttonAddEditTeacher
+			// 
+			this.buttonAddEditTeacher.Location = new System.Drawing.Point(659, 3);
+			this.buttonAddEditTeacher.Name = "buttonAddEditTeacher";
+			this.buttonAddEditTeacher.Size = new System.Drawing.Size(125, 23);
+			this.buttonAddEditTeacher.TabIndex = 1;
+			this.buttonAddEditTeacher.Text = "Добавить/Изменить";
+			this.buttonAddEditTeacher.UseVisualStyleBackColor = true;
+			// 
 			// dataGridViewTeachers
 			// 
 			this.dataGridViewTeachers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -280,35 +315,6 @@
 			this.dataGridViewTeachers.Name = "dataGridViewTeachers";
 			this.dataGridViewTeachers.Size = new System.Drawing.Size(789, 373);
 			this.dataGridViewTeachers.TabIndex = 0;
-			// 
-			// checkBoxEmptyDirection
-			// 
-			this.checkBoxEmptyDirection.AutoSize = true;
-			this.checkBoxEmptyDirection.Location = new System.Drawing.Point(606, 6);
-			this.checkBoxEmptyDirection.Name = "checkBoxEmptyDirection";
-			this.checkBoxEmptyDirection.Size = new System.Drawing.Size(183, 17);
-			this.checkBoxEmptyDirection.TabIndex = 1;
-			this.checkBoxEmptyDirection.Text = "Показать пустые направления";
-			this.checkBoxEmptyDirection.UseVisualStyleBackColor = true;
-			this.checkBoxEmptyDirection.CheckedChanged += new System.EventHandler(this.checkBoxEmptyDirection_CheckedChanged);
-			// 
-			// buttonAddEditGroup
-			// 
-			this.buttonAddEditGroup.Location = new System.Drawing.Point(660, 5);
-			this.buttonAddEditGroup.Name = "buttonAddEditGroup";
-			this.buttonAddEditGroup.Size = new System.Drawing.Size(124, 23);
-			this.buttonAddEditGroup.TabIndex = 3;
-			this.buttonAddEditGroup.Text = "Добавить/Изменить";
-			this.buttonAddEditGroup.UseVisualStyleBackColor = true;
-			// 
-			// buttonAddEditTeacher
-			// 
-			this.buttonAddEditTeacher.Location = new System.Drawing.Point(659, 3);
-			this.buttonAddEditTeacher.Name = "buttonAddEditTeacher";
-			this.buttonAddEditTeacher.Size = new System.Drawing.Size(125, 23);
-			this.buttonAddEditTeacher.TabIndex = 1;
-			this.buttonAddEditTeacher.Text = "Добавить/Изменить";
-			this.buttonAddEditTeacher.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 

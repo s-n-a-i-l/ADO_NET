@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Runtime.InteropServices;
+using System.Configuration;
 
 
 namespace Academy
@@ -20,6 +21,7 @@ namespace Academy
 			string connectionString = "Data Source=DESKTOP-NFMFIIS\\SQLEXPRESS;Initial Catalog=PD_321;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 			Dictionary<string, int> d_groupDirection;
 			Dictionary<string, int> d_studentsGroup;
+		Connector connector;
 
 		Query[] queries = new Query[]
 			{
@@ -52,7 +54,10 @@ namespace Academy
 		{
 			InitializeComponent();
 			AllocConsole();
+			connectionString = ConfigurationManager.ConnectionStrings["PD_321"].ConnectionString;
+			Console.WriteLine(connectionString);
 			connection = new SqlConnection(connectionString);
+			connector = new Connector();
 
 			Console.WriteLine(this.Name);
 			Console.WriteLine(tabControl.TabCount);
@@ -77,7 +82,7 @@ namespace Academy
 			comboBoxStudentsDirection.SelectedIndex = comboBoxGroupsDirection.SelectedIndex = 0;
 			comboBoxStudentsGroup.SelectedIndex = 0;
 
-			tabControl.SelectedIndex = 1;
+			tabControl.SelectedIndex = 0;
 
 			for (int i = 0; i < tabControl.TabCount; i++)
 			{
@@ -91,6 +96,9 @@ namespace Academy
 			DataGridView dataGridView = this.Controls.Find($"dataGridView{tableName}", true)[0] as DataGridView;
 			dataGridView.DataSource = Select(queries[i].Fields, queries[i].Tables, queries[i].Condition);
 			//toolStripStatusLabel.Text = $"{statusBarMessages[i]}: {dataGridView.RowCount - 1}";
+			if (i == 1) ConvertLearningDays();
+			dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+			dataGridView.ReadOnly = true;
 		}
 		void FillStatusBar(int i)
 		{
@@ -119,6 +127,15 @@ namespace Academy
 			connection.Close();
 
 			return table;
+		}
+
+		void Insert(string table,string fields, string values) 
+		{
+			string cmd = $"INSERT {table}({fields}) VALUES ({values})";
+			SqlCommand command = new SqlCommand(cmd, connection);
+			connection.Open();
+			command.ExecuteNonQuery();
+			connection.Close();
 		}
 		Dictionary<string, int> LoadDataToDictionary(string fields, string tables, string condition = "")
 		{
@@ -226,30 +243,41 @@ namespace Academy
 
 		private void checkBoxEmptyDirection_CheckedChanged(object sender, EventArgs e)
 		{
-			LoadDirections();
+			
 		}
 
-		private void LoadDirections()
+		private void buttonAddEditStudent_Click(object sender, EventArgs e)
 		{
-			if (checkBoxEmptyDirection.Checked)
+			StudentForm student = new StudentForm();
+			DialogResult result = student.ShowDialog();
+
+			if (result == DialogResult.OK) 
 			{
-				// направления без групп
-				dataGridViewDirections.DataSource = Select(
-					"d.direction_id, d.direction_name",
-					"Directions d LEFT JOIN Groups g ON d.direction_id = g.direction",
-					"g.group_id IS NULL"
-				);
-			}
-			else
-			{
-				dataGridViewDirections.DataSource = Select(
-					queries[2].Fields,
-					queries[2].Tables,
-					queries[2].Condition
-				);
+
+				Insert(
+					"Students",
+					"last_name, first_name,middle_name,birth_date,email,phone,[group]",
+					student.Student.ToString()
+					);
 			}
 		}
 
+		private void dataGridViewStudents_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			int i = Convert.ToInt32(dataGridViewStudents.SelectedRows[0].Cells[0].Value);
+			StudentForm form = new StudentForm(i);
+			DialogResult result = form.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				connector.Update
+				(
+					"Students",
+					form.Student.ToStringUpdate(),
+					$"stud_id={i}"
+				);
+				comboBoxStudentsGroup_SelectedIndexChanged(null, null);
+			}
+		}
 	}
 }
 //		void LoadDirections() 
