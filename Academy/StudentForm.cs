@@ -8,6 +8,9 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Data.SqlClient;
 
 
 namespace Academy
@@ -53,7 +56,19 @@ namespace Academy
 			comboBoxGroup.SelectedValue = student.Rows[0][8];
 			labelID.Visible = true;
 			labelID.Text = $"ID: {student.Rows[0][0].ToString()}";
+
+			/////////////////////
+			//object photo_obj = student.Rows[0][7];
+			//Console.WriteLine(photo_obj.ToString());
+			//BinaryFormatter bf = new BinaryFormatter();
+			//MemoryStream ms = new MemoryStream(photo_obj);
+			//bf.Serialize(ms, photo_obj);
+			//pictureBoxPhoto.Image = Image.FromStream(ms, true, true);
+
+			pictureBoxPhoto.Image = connector.DownloadPhoto(stud_id, "Students","photo");
+
 		}
+		
 		void Compress()
 		{
 			Student.LastName = textBoxLastName.Text;

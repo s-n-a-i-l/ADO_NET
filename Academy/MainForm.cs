@@ -21,7 +21,7 @@ namespace Academy
 			string connectionString = "Data Source=DESKTOP-NFMFIIS\\SQLEXPRESS;Initial Catalog=PD_321;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 			Dictionary<string, int> d_groupDirection;
 			Dictionary<string, int> d_studentsGroup;
-		Connector connector;
+			Connector connector;
 
 		Query[] queries = new Query[]
 			{
