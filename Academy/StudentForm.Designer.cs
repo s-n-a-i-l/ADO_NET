@@ -168,9 +168,12 @@
 			// 
 			// pictureBoxPhoto
 			// 
+			this.pictureBoxPhoto.BackColor = System.Drawing.SystemColors.ActiveBorder;
+			this.pictureBoxPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.pictureBoxPhoto.Location = new System.Drawing.Point(301, 9);
 			this.pictureBoxPhoto.Name = "pictureBoxPhoto";
 			this.pictureBoxPhoto.Size = new System.Drawing.Size(200, 234);
+			this.pictureBoxPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxPhoto.TabIndex = 14;
 			this.pictureBoxPhoto.TabStop = false;
 			// 
@@ -182,6 +185,7 @@
 			this.buttonBrowsPhoto.TabIndex = 15;
 			this.buttonBrowsPhoto.Text = "Обзор";
 			this.buttonBrowsPhoto.UseVisualStyleBackColor = true;
+			this.buttonBrowsPhoto.Click += new System.EventHandler(this.buttonBrowsPhoto_Click);
 			// 
 			// buttonOK
 			// 

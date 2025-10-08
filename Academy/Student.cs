@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Academy
 {
@@ -15,10 +17,10 @@ namespace Academy
 		public string Email      { get; set; }
 		public string Phone      { get; set; }
 		public int Group         { get; set; }
-		public byte[] Photo      { get; set; }
+		public Image Photo       { get; set; }
 
 		public Student() { }
-		public Student(string last_name, string first_name, string middle_name, string birth_date, string email, string phone, int group)
+		public Student(string last_name, string first_name, string middle_name, string birth_date, string email, string phone, int group,Image photo)
 		{
 			LastName = last_name;
 			FirstName = first_name;
@@ -27,6 +29,13 @@ namespace Academy
 			Email = email;
 			Phone = phone;
 			Group = group;
+			Photo = photo;
+		}
+		public byte[] SerializePhoto() 
+		{
+		  MemoryStream ms = new MemoryStream();
+			Photo.Save(ms, Photo.RawFormat);
+			return ms.ToArray();
 		}
 		public override string ToString()
 		{
