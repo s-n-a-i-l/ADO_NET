@@ -45,10 +45,10 @@
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonBrowsPhoto = new System.Windows.Forms.Button();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.pictureBoxPhoto = new System.Windows.Forms.PictureBox();
 			this.labelRate = new System.Windows.Forms.Label();
 			this.textBoxRate = new System.Windows.Forms.TextBox();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelLastName
@@ -194,16 +194,16 @@
 			this.buttonBrowsPhoto.Text = "Обзор";
 			this.buttonBrowsPhoto.UseVisualStyleBackColor = true;
 			// 
-			// pictureBox1
+			// pictureBoxPhoto
 			// 
-			this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-			this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pictureBox1.Location = new System.Drawing.Point(280, 10);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(212, 293);
-			this.pictureBox1.TabIndex = 19;
-			this.pictureBox1.TabStop = false;
+			this.pictureBoxPhoto.BackColor = System.Drawing.SystemColors.ActiveBorder;
+			this.pictureBoxPhoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.pictureBoxPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pictureBoxPhoto.Location = new System.Drawing.Point(280, 10);
+			this.pictureBoxPhoto.Name = "pictureBoxPhoto";
+			this.pictureBoxPhoto.Size = new System.Drawing.Size(212, 293);
+			this.pictureBoxPhoto.TabIndex = 19;
+			this.pictureBoxPhoto.TabStop = false;
 			// 
 			// labelRate
 			// 
@@ -228,7 +228,7 @@
 			this.ClientSize = new System.Drawing.Size(501, 384);
 			this.Controls.Add(this.textBoxRate);
 			this.Controls.Add(this.labelRate);
-			this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.pictureBoxPhoto);
 			this.Controls.Add(this.buttonBrowsPhoto);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.buttonOK);
@@ -249,7 +249,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "TeacherForm";
 			this.Text = "TeacherForm";
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -274,7 +274,7 @@
 		private System.Windows.Forms.Button buttonOK;
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.Button buttonBrowsPhoto;
-		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.PictureBox pictureBoxPhoto;
 		private System.Windows.Forms.Label labelRate;
 		private System.Windows.Forms.TextBox textBoxRate;
 	}

@@ -94,9 +94,9 @@ namespace Academy
 			SqlCommand command = new SqlCommand(cmd, connection);
 			connection.Open();
 			SqlDataReader reader = command.ExecuteReader();
-			if (reader.Read()) 
+			if (reader.Read())
 			{
-			    MemoryStream ms = new MemoryStream(reader[0] as byte[]);
+				MemoryStream ms = new MemoryStream(reader[0] as byte[]);
 				photo = Image.FromStream(ms);
 			}
 			connection.Close();
