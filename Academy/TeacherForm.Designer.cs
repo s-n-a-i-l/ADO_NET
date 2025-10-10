@@ -42,8 +42,6 @@
 			this.textBoxPhone = new System.Windows.Forms.TextBox();
 			this.labelWorkSince = new System.Windows.Forms.Label();
 			this.dateTimePickerWorkSince = new System.Windows.Forms.DateTimePicker();
-			this.labelWorkSince2 = new System.Windows.Forms.Label();
-			this.dateTimePickerWorkSince2 = new System.Windows.Forms.DateTimePicker();
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonBrowsPhoto = new System.Windows.Forms.Button();
@@ -167,23 +165,6 @@
 			this.dateTimePickerWorkSince.Size = new System.Drawing.Size(122, 20);
 			this.dateTimePickerWorkSince.TabIndex = 13;
 			// 
-			// labelWorkSince2
-			// 
-			this.labelWorkSince2.AutoSize = true;
-			this.labelWorkSince2.Location = new System.Drawing.Point(16, 286);
-			this.labelWorkSince2.Name = "labelWorkSince2";
-			this.labelWorkSince2.Size = new System.Drawing.Size(87, 13);
-			this.labelWorkSince2.TabIndex = 14;
-			this.labelWorkSince2.Text = "Рабочее время:";
-			// 
-			// dateTimePickerWorkSince2
-			// 
-			this.dateTimePickerWorkSince2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-			this.dateTimePickerWorkSince2.Location = new System.Drawing.Point(113, 283);
-			this.dateTimePickerWorkSince2.Name = "dateTimePickerWorkSince2";
-			this.dateTimePickerWorkSince2.Size = new System.Drawing.Size(122, 20);
-			this.dateTimePickerWorkSince2.TabIndex = 15;
-			// 
 			// buttonOK
 			// 
 			this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -227,7 +208,7 @@
 			// labelRate
 			// 
 			this.labelRate.AutoSize = true;
-			this.labelRate.Location = new System.Drawing.Point(16, 321);
+			this.labelRate.Location = new System.Drawing.Point(16, 284);
 			this.labelRate.Name = "labelRate";
 			this.labelRate.Size = new System.Drawing.Size(46, 13);
 			this.labelRate.TabIndex = 20;
@@ -235,7 +216,7 @@
 			// 
 			// textBoxRate
 			// 
-			this.textBoxRate.Location = new System.Drawing.Point(72, 318);
+			this.textBoxRate.Location = new System.Drawing.Point(72, 281);
 			this.textBoxRate.Name = "textBoxRate";
 			this.textBoxRate.Size = new System.Drawing.Size(100, 20);
 			this.textBoxRate.TabIndex = 21;
@@ -251,8 +232,6 @@
 			this.Controls.Add(this.buttonBrowsPhoto);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.buttonOK);
-			this.Controls.Add(this.dateTimePickerWorkSince2);
-			this.Controls.Add(this.labelWorkSince2);
 			this.Controls.Add(this.dateTimePickerWorkSince);
 			this.Controls.Add(this.labelWorkSince);
 			this.Controls.Add(this.textBoxPhone);
@@ -292,8 +271,6 @@
 		private System.Windows.Forms.TextBox textBoxPhone;
 		private System.Windows.Forms.Label labelWorkSince;
 		private System.Windows.Forms.DateTimePicker dateTimePickerWorkSince;
-		private System.Windows.Forms.Label labelWorkSince2;
-		private System.Windows.Forms.DateTimePicker dateTimePickerWorkSince2;
 		private System.Windows.Forms.Button buttonOK;
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.Button buttonBrowsPhoto;

@@ -10,13 +10,11 @@ using System.Windows.Forms;
 
 namespace Academy
 {
-	public partial class TeacherForm : Form
+	public partial class HumanForm : UserControl
 	{
-		public TeacherForm()
+		public HumanForm()
 		{
 			InitializeComponent();
 		}
-
-
 	}
 }

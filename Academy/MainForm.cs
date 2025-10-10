@@ -259,9 +259,9 @@ namespace Academy
 					"last_name, first_name,middle_name,birth_date,email,phone,[group]",
 					student.Student.ToString()
 					);
-			}
 			int id = Convert.ToInt32(connector.Scalar("SELECT MAX(stud_id) FROM Students"));
 			connector.UploadImage(student.Student.SerializePhoto(), id, "photo", "Students");
+			}
 		}
 
 		private void dataGridViewStudents_MouseDoubleClick(object sender, MouseEventArgs e)
