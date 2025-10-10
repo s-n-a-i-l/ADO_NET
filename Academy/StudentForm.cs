@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Data.SqlClient;
+using System.Linq.Expressions;
 
 
 namespace Academy
@@ -65,8 +66,14 @@ namespace Academy
 			//bf.Serialize(ms, photo_obj);
 			//pictureBoxPhoto.Image = Image.FromStream(ms, true, true);
 
-			pictureBoxPhoto.Image = connector.DownloadPhoto(stud_id, "Students","photo");
-
+			try
+			{
+				pictureBoxPhoto.Image = connector.DownloadPhoto(stud_id, "Students", "photo");
+			}
+			catch(Exception ex) 
+			{
+				//MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 		
 		void Compress()
