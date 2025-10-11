@@ -96,8 +96,13 @@ namespace Academy
 			SqlDataReader reader = command.ExecuteReader();
 			if (reader.Read())
 			{
-				MemoryStream ms = new MemoryStream(reader[0] as byte[]);
-				photo = Image.FromStream(ms);
+				object buffer = reader[0];
+				Console.WriteLine(buffer);
+				if (buffer != null)
+				{
+					MemoryStream ms = new MemoryStream(buffer as byte[]);
+					photo = Image.FromStream(ms); 
+				}
 			}
 			connection.Close();
 			return photo;

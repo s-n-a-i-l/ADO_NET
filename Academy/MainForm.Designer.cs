@@ -304,6 +304,7 @@
 			this.buttonAddEditTeacher.TabIndex = 1;
 			this.buttonAddEditTeacher.Text = "Добавить/Изменить";
 			this.buttonAddEditTeacher.UseVisualStyleBackColor = true;
+			this.buttonAddEditTeacher.Click += new System.EventHandler(this.buttonAddEditTeacher_Click);
 			// 
 			// dataGridViewTeachers
 			// 

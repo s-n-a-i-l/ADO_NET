@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Academy
 {
-	public partial class TeacherForm : Form
+	public partial class TeacherForm :BaseHumanForm
 	{
 		public TeacherForm()
 		{

@@ -17,7 +17,7 @@ namespace Academy
 		public BaseHumanForm()
 		{
 			InitializeComponent();
-			connector = new Connector();
+			//connector = new Connector();
 			buttonBrowsPhoto.Click += new EventHandler(buttonBrowsPhoto_Click);
 			buttonOK.Click += new EventHandler(buttonOK_Click);
 		}
@@ -30,9 +30,16 @@ namespace Academy
 			dateTimePickerBirthDate.Text = Human.BirthDate;
 			textBoxEmail.Text = Human.Email;
 			textBoxPhone.Text = Human.Phone;
-			pictureBoxPhoto.Image = Human.Photo;
 			labelID.Visible = true;
 			//labelID.Text = $"ID: {student.Rows[0][0].ToString()}";
+			try
+			{
+				pictureBoxPhoto.Image = Human.Photo;
+	}
+			catch (Exception)
+			{
+			}
+			
 
 		}
 		private void buttonBrowsPhoto_Click(object sender, EventArgs e)
