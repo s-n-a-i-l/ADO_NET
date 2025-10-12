@@ -58,7 +58,7 @@
 			// 
 			// dateTimePickerWorkSince
 			// 
-			this.dateTimePickerWorkSince.CustomFormat = "yyyy-MM-dd,HH:mm:ss";
+			this.dateTimePickerWorkSince.CustomFormat = "yyyy-MM-dd";
 			this.dateTimePickerWorkSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.dateTimePickerWorkSince.Location = new System.Drawing.Point(86, 245);
 			this.dateTimePickerWorkSince.Name = "dateTimePickerWorkSince";

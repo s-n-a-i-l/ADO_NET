@@ -316,6 +316,7 @@
 			this.dataGridViewTeachers.Name = "dataGridViewTeachers";
 			this.dataGridViewTeachers.Size = new System.Drawing.Size(789, 373);
 			this.dataGridViewTeachers.TabIndex = 0;
+			this.dataGridViewTeachers.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewTeachers_MouseDoubleClick);
 			// 
 			// MainForm
 			// 

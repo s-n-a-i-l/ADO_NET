@@ -297,21 +297,39 @@ namespace Academy
 
 		private void buttonAddEditTeacher_Click(object sender, EventArgs e)
 		{
-			//StudentForm student = new StudentForm();
-			//DialogResult result = student.ShowDialog();
+			TeacherForm teacher = new TeacherForm();
+			DialogResult result = teacher.ShowDialog();
 
-			//if (result == DialogResult.OK)
-			//{
+			if (result == DialogResult.OK)
+			{
 
-			//	connector.Insert(
-			//		"Students",
-			//		"last_name, first_name,middle_name,birth_date,email,phone,[group]",
-			//		student.Student.ToString()
-			//		);
-			//	int id = Convert.ToInt32(connector.Scalar("SELECT MAX(stud_id) FROM Students"));
-			//	connector.UploadImage(student.Student.SerializePhoto(), id, "photo", "Students");
-			//}
+				connector.Insert(
+					"Teachers",
+					"last_name, first_name,middle_name,birth_date,email,phone,work_since,rate",
+					(teacher.Human as Teacher).ToString()
+					);
+				int id = Convert.ToInt32(connector.Scalar("SELECT MAX(teach_id) FROM Teachers"));
+				connector.UploadImage((teacher.Human as Teacher).SerializePhoto(), id, "photo", "Teachers");
+			}
 
+		}
+
+		private void dataGridViewTeachers_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			short i = Convert.ToInt16(dataGridViewTeachers.SelectedRows[0].Cells[9].Value);
+			
+			TeacherForm teacher = new TeacherForm(i);
+			DialogResult result = teacher.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				connector.Update
+					   (
+						 "Teachers",
+						 (teacher.Human as Teacher).ToStringUpdate(),
+						 $"teach_id={i}"
+					   );
+				connector.UploadImage((teacher.Human as Teacher).SerializePhoto(), i, "photo", "teachers");
+			}
 		}
 	}
 }

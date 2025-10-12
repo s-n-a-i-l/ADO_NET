@@ -17,7 +17,7 @@ namespace Academy
 		public BaseHumanForm()
 		{
 			InitializeComponent();
-			//connector = new Connector();
+			connector = new Connector();
 			buttonBrowsPhoto.Click += new EventHandler(buttonBrowsPhoto_Click);
 			buttonOK.Click += new EventHandler(buttonOK_Click);
 		}
@@ -45,7 +45,7 @@ namespace Academy
 		private void buttonBrowsPhoto_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog dialog = new OpenFileDialog();
-			dialog.Filter = "JPG files (*.jpg)|*.jpg|PNG files(*.pnj)|*.pnj|All image files|*.png;*.jpg|All files (*.*)|*.*";//name|value
+			dialog.Filter = "JPG files (*.jpg)|*.jpg|PNG files(*.png)|*.png|All image files|*.png;*.jpg|All files (*.*)|*.*";//name|value
 			if (dialog.ShowDialog() == DialogResult.OK)
 			{
 				pictureBoxPhoto.Image = Image.FromFile(dialog.FileName);
