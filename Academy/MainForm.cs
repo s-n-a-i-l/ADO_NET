@@ -52,6 +52,7 @@ namespace Academy
 			};
 		public MainForm()
 		{
+	     
 			InitializeComponent();
 			AllocConsole();
 			connectionString = ConfigurationManager.ConnectionStrings["PD_321"].ConnectionString;
