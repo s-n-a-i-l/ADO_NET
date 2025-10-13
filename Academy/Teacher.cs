@@ -15,7 +15,7 @@ namespace Academy
 
 	internal class Teacher : Human
 	{
-		public short ID { get; set; }
+		//public short ID { get; set; }
 		public string WorkSince { get; set; }
 		public SqlMoney Rate { get; set; }
 
@@ -26,18 +26,9 @@ namespace Academy
 			Connector connector = new Connector();
 			DataTable teacher = connector.Select("*", "Teachers", $"teach_id={teach_id}");
 
-			ID = teach_id;
-			LastName = teacher.Rows[0][0].ToString();
-			FirstName = teacher.Rows[0][1].ToString();
-			MiddleName = teacher.Rows[0][2].ToString();
-
-			BirthDate = teacher.Rows[0][3].ToString();
-			Email = teacher.Rows[0][4].ToString();
-			Phone = teacher.Rows[0][5].ToString();
-
+			InitFromDataRow(teacher.Rows[0], teach_id, 0, 1, 2, 3, 4, 5); 
 			WorkSince = teacher.Rows[0][7].ToString();
 			Rate = Convert.ToDecimal(teacher.Rows[0][8]);
-			
 			try
 			{
 				Photo = connector.DownloadPhoto(teach_id, "Teachers", "photo");

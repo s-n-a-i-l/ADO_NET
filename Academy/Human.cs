@@ -1,16 +1,18 @@
 ﻿using System;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace Academy
 {
 	internal class Human
 	{
+		public int ID { get; set; }
 		public string LastName { get; set; }
 		public string FirstName { get; set; }
 		public string MiddleName { get; set; }
@@ -29,6 +31,16 @@ namespace Academy
 			Email = email;
 			Phone = phone;
 			Photo = photo;
+		}
+		protected void InitFromDataRow(DataRow row, int id, int lnIdx, int fnIdx, int mnIdx, int bdIdx, int emailIdx, int phoneIdx)
+		{
+			ID = id;
+			LastName = row[lnIdx].ToString();
+			FirstName = row[fnIdx].ToString();
+			MiddleName = row[mnIdx].ToString();
+			BirthDate = row[bdIdx].ToString();
+			Email = row[emailIdx].ToString();
+			Phone = row[phoneIdx].ToString();
 		}
 		public byte[] SerializePhoto()
 		{

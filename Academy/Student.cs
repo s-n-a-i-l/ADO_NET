@@ -12,21 +12,14 @@ namespace Academy
 {
 	internal class Student:Human
 	{
-		public int ID {  get; set; }
+		//public int ID {  get; set; }
 		public int Group  { get; set; }
 		public Student(int stud_id) 
 		{
 			Connector connector = new Connector();
 			DataTable student = connector.Select("*", "Students", $"stud_id={stud_id}");
 
-			ID = stud_id;
-			LastName = student.Rows[0][1].ToString();
-			FirstName = student.Rows[0][2].ToString();
-			MiddleName = student.Rows[0][3].ToString();
-
-			BirthDate =student.Rows[0][4].ToString();
-			Email = student.Rows[0][5].ToString();
-			Phone = student.Rows[0][6].ToString();
+			InitFromDataRow(student.Rows[0], stud_id, 1, 2, 3, 4, 5, 6); 
 			Group = Convert.ToInt32(student.Rows[0][8]);
 			try
 			{
