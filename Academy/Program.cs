@@ -16,7 +16,20 @@ namespace Academy
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
+
+			UserVerification();
+		}
+		static void UserVerification() 
+		{
+			LoginForm login = new LoginForm();
+			DialogResult result = login.ShowDialog();
+
+			if (result == DialogResult.OK)
+			{
+				if (login.Resut) Application.Run(new MainForm());
+				else MessageBox.Show("Произошла ошибка при попытке входа.\nНеверный логин или пароль.", "Ошибка");
+			}
+			else return;
 		}
 	}
 }
