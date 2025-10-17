@@ -35,6 +35,14 @@ namespace LINQ
 			  Console.Write($"{i}\t");
 			}
 			 Console.WriteLine();
+
+			///////////////
+			///
+			Console.WriteLine((from i in arr select i).Count());// immideate queries немедленное выполнение запроса
+			Console.WriteLine((from i in arr select i).Sum());// immideate queries
+			List<int> i_list = (from i in arr select i).ToList();
+
+
 		}
 		[DllImport("kernel32.dll")]
 		public static extern bool AllocConsole();
